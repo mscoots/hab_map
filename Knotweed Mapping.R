@@ -17,5 +17,7 @@ points(x=HABS$Longitude[which(HABS$Knotweed_Num>0)], y=HABS$Latitude[which(HABS$
 text(x=HABS$Longitude, y=HABS$Latitude,labels = HABS$Site_Number,cex=0.7) #make plot points habitat numbers
 
 #use xlim/ylim to zoom in on areas of the graph
-#plot(x=HABS$Longitude, y=HABS$Latitude, xlab = "Longitude", ylab = "Latitude",type="n", cex=0.7,
-     #xlim=c(-71.490,-71.480), ylim=c(44.47,44.48))
+plot(x=HABS$Longitude, y=HABS$Latitude, xlab = "Longitude", ylab = "Latitude",type="n", cex=0.7,
+     xlim=c(-71.495,-71.485), ylim=c(44.465,44.475))
+
+cbind(HABS$Site_Number,HABS$total_knotweed_area_m2)
