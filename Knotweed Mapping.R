@@ -47,7 +47,7 @@ macros$Site <- macros$Sample.Site
 right_join(HABS,macros,by="Site")
 
 #extract unique habitats that were sampled by surber/drift nets
-#assume that the object "macros" is your dataframe
+#assume that the object "macros" is your data frame
 
 bug.habs <- data.frame(NA)
 bug.habs
