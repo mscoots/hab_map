@@ -12,9 +12,16 @@ windows() #create a larger window to print plot
 plot(x=HABS$Longitude, y=HABS$Latitude, xlab = "Longitude", ylab = "Latitude",type="n", cex=0.7)
 #cex used to alter size of text
 
+kw.habs <- HABS[which(HABS$Knotweed_Num>0),]
+points(x=kw.habs$Longitude, y=kw.habs$Latitude, cex=sqrt(kw.habs$total_knotweed_area_m2/5),
+       col="red")
+
 #plot locations of knotweed
 points(x=HABS$Longitude[which(HABS$Knotweed_Num>0)], y=HABS$Latitude[which(HABS$Knotweed_Num>0)], col = "red", pch = 16,
        cex =sqrt(HABS$total_knotweed_area_m2)/5)
+
+points(x=HABS$Longitude[which(HABS$Knotweed_Num>0)], y=HABS$Latitude[which(HABS$Knotweed_Num>0)], col = "blue", pch = 16,
+       cex =sqrt(HABS$total_knotweed_area_m2[which(HABS$Knotweed_Num>0)])/5)
 #cex used to make size of plot point correspondent to total area of knotweed
 
 #plot where brook trout was collected
@@ -27,3 +34,22 @@ plot(x=HABS$Longitude, y=HABS$Latitude, xlab = "Longitude", ylab = "Latitude",ty
      xlim=c(-71.495,-71.485), ylim=c(44.465,44.475))
 
 cbind(HABS$Site_Number,HABS$total_knotweed_area_m2)
+
+
+
+# merge datasets ----------------------------------------------------------
+library(dplyr)
+macros <- read.csv("total_macro_inventory_2021.csv")
+str(macros)
+macros$Site <- macros$Sample.Site
+
+#right join between HABS and macros
+right_join(HABS,macros,by="Site")
+
+#extract unique habitats that were sampled by surber/drift nets
+#assume that the object "macros" is your dataframe
+
+bug.habs <- data.frame(NA)
+bug.habs
+bug.habs$Site <- unique(macros$Site)
+
