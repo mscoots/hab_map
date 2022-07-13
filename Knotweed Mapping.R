@@ -27,7 +27,11 @@ points(x=HABS$Longitude[which(HABS$Knotweed_Num>0)], y=HABS$Latitude[which(HABS$
 #plot where brook trout was collected
 points(x=BT$Lon,y=BT$Lat, col="green", pch=16)
 
-text(x=HABS$Longitude, y=HABS$Latitude,labels = HABS$Site_Number,cex=0.7) #make plot points habitat numbers
+#plot where macroinvertebrates were collected
+points(x=macros$,y=macros$, col="green", pch=16)
+
+#make plot points habitat numbers
+text(x=HABS$Longitude, y=HABS$Latitude,labels = HABS$Site_Number,cex=0.7)
 
 #use xlim/ylim to zoom in on areas of the graph
 plot(x=HABS$Longitude, y=HABS$Latitude, xlab = "Longitude", ylab = "Latitude",type="n", cex=0.7,
@@ -45,6 +49,7 @@ macros$Site <- macros$Sample.Site
 
 #right join between HABS and macros
 right_join(HABS,macros,by="Site")
+
 
 #extract unique habitats that were sampled by surber/drift nets
 #assume that the object "macros" is your data frame
