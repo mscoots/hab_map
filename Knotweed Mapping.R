@@ -48,8 +48,8 @@ str(macros)
 macros$Site <- macros$Sample.Site
 
 #right join between HABS and macros
-right_join(HABS,macros,by="Site")
-
+macro.habs <- right_join(HABS,macros,by="Site")
+str(macro.habs)
 
 #extract unique habitats that were sampled by surber/drift nets
 #assume that the object "macros" is your data frame
