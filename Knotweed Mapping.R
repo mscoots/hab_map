@@ -12,23 +12,17 @@ windows() #create a larger window to print plot
 plot(x=HABS$Longitude, y=HABS$Latitude, xlab = "Longitude", ylab = "Latitude",type="n", cex=0.7)
 #cex used to alter size of text
 
+#plot locations of knotweed
 kw.habs <- HABS[which(HABS$Knotweed_Num>0),]
 points(x=kw.habs$Longitude, y=kw.habs$Latitude, cex=sqrt(kw.habs$total_knotweed_area_m2/5),
        col="red")
-
-#plot locations of knotweed
-points(x=HABS$Longitude[which(HABS$Knotweed_Num>0)], y=HABS$Latitude[which(HABS$Knotweed_Num>0)], col = "red", pch = 16,
-       cex =sqrt(HABS$total_knotweed_area_m2)/5)
-
-points(x=HABS$Longitude[which(HABS$Knotweed_Num>0)], y=HABS$Latitude[which(HABS$Knotweed_Num>0)], col = "blue", pch = 16,
-       cex =sqrt(HABS$total_knotweed_area_m2[which(HABS$Knotweed_Num>0)])/5)
 #cex used to make size of plot point correspondent to total area of knotweed
 
 #plot where brook trout was collected
 points(x=BT$Lon,y=BT$Lat, col="green", pch=16)
 
 #plot where macroinvertebrates were collected
-points(x=macros$,y=macros$, col="green", pch=16)
+points(x=macro.habs$Longitude,y=macro.habs$Latitude, col="orange", pch=16)
 
 #make plot points habitat numbers
 text(x=HABS$Longitude, y=HABS$Latitude,labels = HABS$Site_Number,cex=0.7)
@@ -49,12 +43,12 @@ macros$Site <- macros$Sample.Site
 
 #right join between HABS and macros
 macro.habs <- right_join(HABS,macros,by="Site")
-str(macro.habs)
+
 
 #extract unique habitats that were sampled by surber/drift nets
 #assume that the object "macros" is your data frame
 
-bug.habs <- data.frame(NA)
-bug.habs
-bug.habs$Site <- unique(macros$Site)
-
+bug.habs <- data.frame(matrix(ncol=1,nrow=56))
+colnames(bug.habs) <- c('Site')
+bug.habs$Site <- unique(macro.habs$Site)
+str(bug.habs)
