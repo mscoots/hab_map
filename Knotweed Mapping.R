@@ -48,7 +48,20 @@ macro.habs <- right_join(HABS,macros,by="Site")
 #extract unique habitats that were sampled by surber/drift nets
 #assume that the object "macros" is your data frame
 
-bug.habs <- data.frame(matrix(ncol=1,nrow=56))
-colnames(bug.habs) <- c('Site')
-bug.habs$Site <- unique(macro.habs$Site)
-str(bug.habs)
+
+sites <- unique(macro.habs$Site)
+str(sites)
+sites
+bugs.habs <- data.frame(site=sites)
+bugs.habs
+
+samples <- unique(macros$Sample.ID)
+samples
+
+sampling <- data.frame(Sample.ID=samples)
+sampling
+
+macros$Sample.ID
+
+sampling2 <- right_join(macro.habs, sampling, by="Sample.ID")
+sampling2
