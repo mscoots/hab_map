@@ -29,7 +29,7 @@ text(x=HABS$Longitude, y=HABS$Latitude,labels = HABS$Site_Number,cex=0.7)
 
 #use xlim/ylim to zoom in on areas of the graph
 plot(x=HABS$Longitude, y=HABS$Latitude, xlab = "Longitude", ylab = "Latitude",type="n", cex=0.7,
-     xlim=c(-71.495,-71.485), ylim=c(44.465,44.475))
+     xlim=c(-71.493,-71.490), ylim=c(44.465,44.471))
 
 cbind(HABS$Site_Number,HABS$total_knotweed_area_m2)
 
@@ -52,7 +52,10 @@ macro.habs <- right_join(HABS,macros,by="Site")
 sites <- unique(macro.habs$Site)
 str(sites)
 sites
+
+x <- macros$Sample.ID
 bugs.habs <- data.frame(site=sites)
+bugs.habs$unit <- substr(x,regexpr("HAB",x)[1],(regexpr("HAB",x)[1]+5))
 bugs.habs
 
 samples <- unique(macros$Sample.ID)
