@@ -49,13 +49,9 @@ macro.habs <- right_join(HABS,macros,by="Site")
 #assume that the object "macros" is your data frame
 
 
-sites <- unique(macro.habs$Site)
-str(sites)
-sites
 
-x <- macros$Sample.ID
-bugs.habs <- data.frame(site=sites)
-bugs.habs$unit <- substr(x,regexpr("HAB",x)[1],(regexpr("HAB",x)[1]+5))
+bugs.habs <- data.frame(Sample=unique(macro.habs$Sample.ID))
+bugs.habs$site <- substr(bugs.habs$Sample,regexpr("HAB",bugs.habs$Sample)[1],(regexpr("HAB",bugs.habs$Sample)[1]+5))
 bugs.habs
 
 samples <- unique(macros$Sample.ID)
